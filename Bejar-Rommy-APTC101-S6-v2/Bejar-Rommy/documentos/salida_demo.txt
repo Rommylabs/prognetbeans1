@@ -1,0 +1,73 @@
+
+==================== 1. USUARIOS: herencia (Estudiante y Docente extienden Usuario) ====================
+Estudiante{nombreCompleto=Camila Rojas Vega, run=18765432-7, genero=F, carrera=Ingeniería en Computación e Informática, prestamo=0}
+Docente{nombreCompleto=Luis Soto Marín, run=10000000-8, genero=M, carrera=Ingeniería en Computación e Informática, prestamo=0}{profesion=Ingeniero Civil Informático, grados=Magíster y Doctor}
+  [CUMPLE] 1. Ingresa un estudiante válido
+  [CUMPLE] 2. Ingresa un docente válido
+  [CUMPLE] 3. Rechaza un RUN con dígito verificador incorrecto -> El dígito verificador del RUN es incorrecto.
+  [CUMPLE] 4. Rechaza un género distinto de M o F -> El género debe ser M o F.
+  [CUMPLE] 5. Rechaza un RUN repetido -> El RUN 18765432-7 ya está registrado.
+  [CUMPLE] 6. Ingresa un segundo estudiante válido
+  [CUMPLE] 7. Rechaza un docente sin grados de magíster o doctor -> Los grados deben ser Magíster, Doctor o Magíster y Doctor.
+
+==================== 2. LIBROS: validaciones de ISBN y cantidades ====================
+Libro{isbn=9780306406157, titulo=Programación en Java, autor=Luis Joyanes, cantidadBiblioteca=2, cantidadDisponible=2, imagen=}
+  [CUMPLE] 8. Ingresa un libro válido
+  [CUMPLE] 9. Rechaza un ISBN repetido -> El ISBN 9780306406157 ya está registrado.
+  [CUMPLE] 10. Ingresa un segundo libro válido
+  [CUMPLE] 11. Rechaza cantidad disponible mayor a la cantidad en biblioteca -> La cantidad disponible debe estar entre 0 y la cantidad en biblioteca (2).
+  [CUMPLE] 12. Rechaza cantidad en biblioteca igual a cero -> La cantidad en biblioteca debe ser mayor a cero.
+  [CUMPLE] 13. Rechaza un ISBN con formato inválido -> ISBN inválido: use 10 caracteres (el último puede ser X) o 13 dígitos.
+
+==================== 3. PRÉSTAMOS: asociación entre Prestamo, Usuario y Libro ====================
+BIBLIOTECA UNAB - SEDE ANTONIO VARAS
+TARJETA DE PRÉSTAMO
+----------------------------------------
+Usuario : Camila Rojas Vega
+RUN     : 18765432-7
+Tipo    : Estudiante
+----------------------------------------
+Libro   : Programación en Java
+Autor   : Luis Joyanes
+ISBN    : 9780306406157
+----------------------------------------
+Préstamo: 2026-11-12
+Plazo   : 8 días
+Devolver: 2026-11-20
+----------------------------------------
+Multa por atraso: $1000 por día
+
+  [CUMPLE] 14. Registra el préstamo de un estudiante por 8 días
+Estudiante tras el préstamo: Estudiante{nombreCompleto=Camila Rojas Vega, run=18765432-7, genero=F, carrera=Ingeniería en Computación e Informática, prestamo=9780306406157}
+Libro tras el préstamo     : Libro{isbn=9780306406157, titulo=Programación en Java, autor=Luis Joyanes, cantidadBiblioteca=2, cantidadDisponible=1, imagen=}
+  [CUMPLE] 15. Rechaza un segundo préstamo al mismo usuario (no habilitado) -> Camila Rojas Vega no está habilitado: tiene el libro 9780306406157 en su poder.
+  [CUMPLE] 16. Rechaza 11 días a un estudiante (máximo 10) -> Los días de préstamo deben estar entre 1 y 10 para un estudiante.
+  [CUMPLE] 17. Rechaza 25 días a un docente (máximo 20) -> Los días de préstamo deben estar entre 1 y 20 para un docente.
+  [CUMPLE] 18. Registra 20 días a un docente (polimorfismo)
+  [CUMPLE] 19. Rechaza el préstamo de un libro sin ejemplares disponibles -> No hay ejemplares disponibles de "Programación en Java".
+  [CUMPLE] 20. Rechaza el préstamo de un libro inexistente -> El libro no existe.
+  [CUMPLE] 21. Rechaza eliminar un usuario con un libro en su poder -> No se puede eliminar: tiene el libro 9780306406157 en su poder.
+  [CUMPLE] 22. Rechaza eliminar un libro con ejemplares prestados -> No se puede eliminar: el libro tiene ejemplares prestados.
+
+==================== 4. DEVOLUCIONES: multa de $1.000 por día de atraso ====================
+  [CUMPLE] 23. Rechaza devolver con un ISBN que no corresponde al préstamo -> El ISBN no coincide con el préstamo del usuario (9780306406157).
+DEVOLUCIÓN REGISTRADA
+Libro   : Programación en Java (9780306406157)
+Usuario : Camila Rojas Vega (18765432-7)
+Fecha límite    : 2026-11-20
+Fecha devolución: 2026-11-23
+Días de atraso  : 3
+Multa a pagar   : $3000
+
+  [CUMPLE] 24. Acepta una devolución con 3 días de atraso y cobra $3.000
+  [CUMPLE] 25. Acepta una devolución a tiempo sin multa
+  [CUMPLE] 26. Rechaza devolver un libro que ya no está prestado -> El ISBN no coincide con el préstamo del usuario (0).
+  [CUMPLE] 27. Elimina un libro sin ejemplares prestados
+
+==================== 5. ARCHIVOS DE TEXTO: los cambios se guardan y se recuperan ====================
+  [CUMPLE] 28. Los usuarios se recuperan desde usuarios.txt
+  [CUMPLE] 29. La eliminación de un libro se recuperó desde libros.txt
+Archivos de la demostración en: /tmp/biblioteca_demo_1794492942659
+
+RESULTADO: 29 de 29 verificaciones se comportaron como se esperaba.
+
